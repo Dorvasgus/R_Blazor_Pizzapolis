@@ -1,0 +1,74 @@
+﻿@page "/Clientes"
+@using PRJ_Delivery_Blazor.Repositorio
+@inject IRepositorio repositorioHTTP
+
+<ListadoGenerico Listado="clientes">
+    <HayRegistroCompleto>
+        <div class="mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>IdCliente</th>
+                        <th>Nit</th>
+                        <th>RazonSocial</th>
+                        <th>UserName</th>
+                        <th>Password</th>
+                        <th>Localidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in clientes!)
+                    {
+                        <tr>
+                            <td>@item.IdCliente</td>
+                            <td>@item.Nit</td>
+                            <td>@item.RazonSocial</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Password</td>
+                            <td>@item.Localidad</td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </HayRegistroCompleto>
+    <NoHayRegistro>
+        <h6>no hay registros desde TEST</h6>
+    </NoHayRegistro>
+    <Cargando>
+        <h1>Esperando informaciòn</h1>
+    </Cargando>
+
+
+</ListadoGenerico>
+
+
+@code {
+
+
+    List<ClienteDTO>? clientes;
+    ResponseListDTO<ClienteDTO>? responseListDTO;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var responseWrapper = await repositorioHTTP.Get<ResponseListDTO<ClienteDTO>>("Cliente?Pagina=1&CantidadRegistrosPorPagina=20");
+            if (!responseWrapper.Error)
+            {
+                responseListDTO = responseWrapper.Response;
+
+                clientes = responseListDTO.valores;
+
+            }
+        }
+        catch (Exception ex)
+        {
+            var mess = ex.Message;
+        }
+
+    }
+
+}

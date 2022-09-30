@@ -1,0 +1,65 @@
+﻿@using PRJ_Delivery_Blazor.DTOs
+
+
+<EditForm Model="productoInsertar" OnValidSubmit="guardar">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="container bg-white bg-opacity-75 p-5 rounded">
+          <div class="row">
+            <div class="col">
+        <label for="PizzaFamiliar">PizzaFamiliar:</label>
+        <InputText id="PizzaFamiliar" class="form-control" @bind-Value="productoInsertar.PizzaFamiliar"></InputText>
+        <ValidationMessage For="@(()=> productoInsertar.PizzaFamiliar)" />
+            </div>
+        </div>
+
+    <div class="row">
+            <div class="col">
+        <label for="PizzaMediana">PizzaMediana:</label>
+        <InputText type="PizzaMediana" id="PizzaMediana" class="form-control" @bind-Value="productoInsertar.PizzaMediana"></InputText>
+        <ValidationMessage For="@(()=> productoInsertar.PizzaMediana)" />
+    </div>
+            <div class="col">
+        <label for="PizzaPequeña">PizzaPequeña:</label>
+        <InputText typeof="PizzaPequeña" id="PizzaPequeña" class="form-control" @bind-Value="productoInsertar.PizzaPequeña"></InputText>
+        <ValidationMessage For="@(()=> productoInsertar.PizzaPequeña)" />
+            </div>
+        </div>
+
+    @if (modo == "Modificar")
+    {
+        <div class="mb-3 row">
+
+            <label for="url">Estado:</label>
+            <div class="col-sm-8">
+                <InputCheckbox id="estado" class="form-control" @bind-Value="@productoInsertar.Estado"></InputCheckbox>
+                <ValidationMessage For="@(()=> productoInsertar.Estado)" />
+            </div>
+
+        </div>
+    }
+    <br />
+    <div class="row">
+            <div class="col">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+</EditForm>
+
+
+
+@code {
+    [Parameter] public string modo { get; set; } = "crear";
+    private ProductoActualizarDTO productoInsertar = new ProductoActualizarDTO();
+
+    private async Task guardar()
+    {
+
+
+        await Task.Delay(2000);
+
+    }
+
+
+}

@@ -1,0 +1,43 @@
+﻿@page "/"
+
+<PageTitle>Iniciar Sesion</PageTitle>
+
+
+
+<style>
+    nav#menu-principal {
+    display: none;
+}
+</style>
+<div class="container text-center" >
+    <div class="row justify-content-center vh-100 align-items-center">
+        <div class="card" style="width: 25rem;">
+            <div class="card-body">
+                <div class="mb-3">
+                    <a class="navbar-brand" href="#">
+                        <img src="/pizzapolis.png" class="mb-2" alt="Bootstrap" width="90" height="auto">
+
+                    </a><br>
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="usuario">
+                </div>
+                <div class="mb-3">
+                    <label for="contraseña" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="contraseña">
+                </div>
+                <button type="button" class="btn btn-primary mb-3" >Iniciar Sesion</button><br>
+                <a class="h6  text-black" href="/Funcionario/Crear">
+                    Crear Cuenta
+
+                </a>
+                @*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button>*@
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<PRJ_Delivery_Blazor.Pages.Funcionario.FormularioFuncionario></PRJ_Delivery_Blazor.Pages.Funcionario.FormularioFuncionario>
+@*<SurveyPrompt Title="How is Blazor working for you?" />*@

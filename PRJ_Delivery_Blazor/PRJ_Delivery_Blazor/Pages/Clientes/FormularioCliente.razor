@@ -1,0 +1,85 @@
+﻿@using PRJ_Delivery_Blazor.DTOs
+
+
+<EditForm Model="clienteInsertar" OnValidSubmit="guardar" >
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="container bg-white bg-opacity-75 p-5 rounded">
+        
+    <div class="row" >
+            <div class="col">
+         <label for="Nit" class="text-black">Documento:</label>
+         <InputText id="Nit" class="form-control" @bind-Value="clienteInsertar.Nit" ></InputText>
+         <ValidationMessage For="@(()=> clienteInsertar.Nit)" />
+    </div>
+
+    <div class="col" >
+                <label for="RazonSocial" class="text-black">RazonSocial:</label>
+         <InputText  id="RazonSocial" class="form-control" @bind-Value="clienteInsertar.RazonSocial" ></InputText>
+         <ValidationMessage For="@(()=> clienteInsertar.RazonSocial)" />
+    </div>
+        </div>
+        <div class="row">
+     <div class="col" >
+                <label for="UserName" class="text-black">UserName:</label>
+        <InputText id="UserName" class="form-control" @bind-Value="clienteInsertar.UserName"></InputText>
+         <ValidationMessage For="@(()=> clienteInsertar.UserName)" />
+    </div>
+
+    
+         <div class="col" >
+                <label for="Password" class="text-black">Password:</label>
+        <InputText type="password" id="Password" class="form-control" @bind-Value="clienteInsertar.Password"></InputText>
+         <ValidationMessage For="@(()=> clienteInsertar.Password)" />
+            </div>
+        </div>
+        
+
+      <div class="row" >
+            <div class="col">
+                <label for="url" class="text-black">Localidad:</label>
+         <InputText  id="url" class="form-control" @bind-Value="clienteInsertar.Localidad" ></InputText>
+         <ValidationMessage For="@(()=> clienteInsertar.Localidad)" />
+    
+        </div>
+        </div>
+
+    @if (modo == "Modificar")
+    {
+         <div class="mb-3 row">
+         
+         <label for="url" >Estado:</label>
+         <div class="col-sm-8">
+                <InputCheckbox id="estado" class="form-control" @bind-Value="@clienteInsertar.Estado"></InputCheckbox>
+                <ValidationMessage For="@(()=> clienteInsertar.Estado)" />
+         </div>
+        
+         </div>
+    }
+    <br />
+    <div class="row" >
+        <div class="col-10" >
+         <button type="submit" class="btn btn-primary" >Guardar</button>
+    </div>
+        </div>
+        </div>
+   
+   
+
+</EditForm>
+
+
+
+@code {
+    [Parameter] public string modo { get; set; } = "crear";
+    private ClienteActualizarDTO clienteInsertar = new ClienteActualizarDTO();
+
+    private async Task guardar()
+    {
+       
+
+        await Task.Delay(2000);
+
+    }
+
+
+}

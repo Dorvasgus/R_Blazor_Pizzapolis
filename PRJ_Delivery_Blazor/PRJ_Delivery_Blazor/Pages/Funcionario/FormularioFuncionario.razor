@@ -1,0 +1,103 @@
+﻿@using PRJ_Delivery_Blazor.DTOs
+<style>
+    nav#menu-principal {
+        display: none;
+    }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="funcionarioInsertar" OnValidSubmit="guardar">
+                    <DataAnnotationsValidator></DataAnnotationsValidator>
+                    <div class="container bg-white bg-opacity-75 p-5 rounded">
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="UserName">UserName:</label>
+                                <InputText id="UserName" class="form-control" @bind-Value="funcionarioInsertar.UserName"></InputText>
+                                <ValidationMessage For="@(()=> funcionarioInsertar.UserName)" />
+                            </div>
+
+                            <div class="col">
+                                <label for="Password">Password:</label>
+                                <InputText type="password" id="Password" class="form-control" @bind-Value="funcionarioInsertar.Password"></InputText>
+                                <ValidationMessage For="@(()=> funcionarioInsertar.Password)" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="email">Correo:</label>
+                                <InputText typeof="email" id="email" class="form-control" @bind-Value="funcionarioInsertar.Correo"></InputText>
+                                <ValidationMessage For="@(()=> funcionarioInsertar.Correo)" />
+                            </div>
+                            <div class="col">
+                                <label for="RazonSocial">RazonSocial:</label>
+                                <InputText id="RazonSocial" class="form-control" @bind-Value="funcionarioInsertar.Rol"></InputText>
+                                <ValidationMessage For="@(()=> funcionarioInsertar.Rol)" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="url">Localidad:</label>
+                                <InputNumber id="url" class="form-control" @bind-Value="funcionarioInsertar.Vehiculo"></InputNumber>
+                                <ValidationMessage For="@(()=> funcionarioInsertar.Vehiculo)" />
+                            </div>
+                        </div>
+
+                        @if (modo == "Modificar")
+                        {
+                            <div class="mb-3 row">
+
+
+                                <label for="url">Estado:</label>
+                                <div class="col-sm-8">
+                                    <InputCheckbox id="estado" class="form-control" @bind-Value="@funcionarioInsertar.Estado"></InputCheckbox>
+                                    <ValidationMessage For="@(()=> funcionarioInsertar.Estado)" />
+                                </div>
+
+                            </div>
+                        }
+                        <br />
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </EditForm>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@code {
+    [Parameter] public string modo { get; set; } = "crear";
+    private FuncionarioActualizarDTO funcionarioInsertar = new FuncionarioActualizarDTO();
+
+    private async Task guardar()
+    {
+
+
+        await Task.Delay(2000);
+
+    }
+
+
+}

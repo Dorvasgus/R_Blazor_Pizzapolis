@@ -1,0 +1,109 @@
+﻿@*<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">PRJ_Delivery_Blazor</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</div>*@
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white" id="menu-principal" style="margin-bottom:70px;">
+    <!-- Container wrapper -->
+    <div class="container">
+        <!-- Navbar brand -->
+        <a class="navbar-brand me-2" href="#">
+            <img src="/pizzapolis.png" class="mb-2" alt="Bootstrap" width="45" height="auto">
+        </a>
+
+        <!-- Toggle button -->
+        <button class="navbar-toggler"
+                type="button"
+                data-mdb-toggle="collapse"
+                data-mdb-target="#navbarButtonsExample"
+                aria-controls="navbarButtonsExample"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <!-- Left links -->
+           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    
+                </li>
+            </ul>
+            <!-- Left links -->
+
+            <div class="d-flex align-items-center">
+                
+                @*<button type="button" class="btn btn-primary me-3">
+                    Sign up for free
+                </button>*@
+                <a class="btn btn-primary me-3"
+                   href="/Cliente/Crear"
+                   role="button">
+                    Clientes
+                </a>
+                
+                <a class="btn btn-primary me-3"
+                   href="/Localidad/Crear"
+                   role="button">
+                    Localidad
+                </a>
+                <a class="btn btn-primary me-3"
+                   href="/Producto/Crear"
+                   role="button">
+                    Productos
+                </a>
+                
+            </div>
+        </div>
+        <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+@*<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <nav class="flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/Cliente/Crear">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Cliente
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/Funcionario/Crear">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Funcionario
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/Producto/Crear">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Producto
+            </NavLink>
+        </div>
+    </nav>
+</div>*@
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

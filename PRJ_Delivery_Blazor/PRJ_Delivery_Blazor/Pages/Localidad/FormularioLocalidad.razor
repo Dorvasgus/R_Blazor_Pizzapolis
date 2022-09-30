@@ -1,0 +1,67 @@
+﻿
+
+ 
+
+
+<EditForm Model="localidadInsertar" OnValidSubmit="guardar">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="container bg-white bg-opacity-75 p-5 rounded">
+        <div class="row">
+            <div class="col">
+                <label for="Barrio">Barrio:</label>
+                <InputText id="Barrio" class="form-control" @bind-Value="localidadInsertar.Barrio"></InputText>
+                <ValidationMessage For="@(()=> localidadInsertar.Barrio)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="Calle">Calle:</label>
+                <InputText id="Calle" class="form-control" @bind-Value="localidadInsertar.Calle"></InputText>
+                <ValidationMessage For="@(()=> localidadInsertar.Calle)" />
+            </div>
+            <div class="col">
+                <label for="Zona">Zona:</label>
+                <InputText id="Zona" class="form-control" @bind-Value="localidadInsertar.Zona"></InputText>
+                <ValidationMessage For="@(()=> localidadInsertar.Zona)" />
+            </div>
+        </div>
+
+       @* @if (modo == "Modificar")
+        {
+            <div class="mb-3 row">
+
+                <label for="url">Estado:</label>
+                <div class="col-sm-8">
+                    <InputCheckbox id="estado" class="form-control" @bind-Value="@localidadInsertar.Estado"></InputCheckbox>
+                    <ValidationMessage For="@(()=> localidadInsertar.Estado)" />
+                </div>
+
+            </div>
+        }*@
+        <br />
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+</EditForm>
+
+
+
+@code {
+    [Parameter] public string modo { get; set; } = "crear";
+    private LocalidadInsertarDTO localidadInsertar = new LocalidadInsertarDTO();
+
+    private async Task guardar()
+    {
+
+
+        await Task.Delay(2000);
+
+    }
+
+
+}
