@@ -1,7 +1,29 @@
-﻿@page "/Cliente/Crear"
+﻿@page "/Clientes/Crear"
+@inject IRepositorio repositorioHTTP
+@inject NavigationManager navigationManager
 
-<FormularioCliente></FormularioCliente>
+
+
+<FormularioCliente  OnValidSubmit="Guardar" model="model">
+
+</FormularioCliente>
+
+
 
 @code {
+    ClienteInsertarDTO model = new ClienteInsertarDTO();
 
+    public async Task Guardar()
+    {
+        var response = await repositorioHTTP.Post<ClienteInsertarDTO, ClienteDTO>("Cliente",model);
+        if (response.Error)
+        {
+            Console.WriteLine(response);
+        }
+        else
+        {
+            navigationManager.NavigateTo("/Clientes");
+        }
+
+    }
 }
