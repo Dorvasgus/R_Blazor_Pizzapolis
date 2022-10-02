@@ -8,28 +8,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>IdCliente</th>
                         <th>Nit</th>
-                        <th>RazonSocial</th>
-                        <th>UserName</th>
-                        <th>Password</th>
-                        <th>Localidad</th>
+                        <th>Rol</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in clientes!)
                     {
                         <tr>
-                            <td>@item.IdCliente</td>
                             <td>@item.Nit</td>
-                            <td>@item.RazonSocial</td>
-                            <td>@item.UserName</td>
-                            <td>@item.Password</td>
-                            <td>@item.Localidad</td>
+                            <td>@item.Rol</td>
                         </tr>
-
                     }
-
                 </tbody>
             </table>
         </div>
