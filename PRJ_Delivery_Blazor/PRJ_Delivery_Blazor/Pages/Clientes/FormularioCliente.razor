@@ -4,8 +4,8 @@
 <EditForm Model="@model" OnValidSubmit="@OnValidSubmit" >
     <DataAnnotationsValidator />
     <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <InputText class="form-control" id="nombre" @bind-Value="model.Nombre" />
+        <label for="nit">Nombre</label>
+        <InputText class="form-control" id="Nit" @bind-Value="model.Nit" />
         <ValidationMessage For="@(() => model.Nit)" />
     </div>
     <div class="form-group">

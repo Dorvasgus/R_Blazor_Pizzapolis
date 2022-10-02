@@ -18,9 +18,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Universidad\Sexto Semestre\Programacion Web II\respaldo_blazor\PRJ_Delivery_Blazor\PRJ_Delivery_Blazor
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Usuario/Desktop/Nueva carpeta (2)/R_Blazor_Pizzapolis/PRJ_Delivery_Blazor/PRJ_Delivery_Blazor/App.razor]
 [D:/Universidad/Sexto Semestre/Programacion Web II/respaldo_blazor/PRJ_Delivery_Blazor/PRJ_Delivery_Blazor/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Universidad/Sexto Semestre/Programacion Web II/respaldo_blazor/PRJ_Delivery_Blazor/PRJ_Delivery_Blazor/Pages/Auth/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aFxMb2dpbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Universidad/Sexto Semestre/Programacion Web II/respaldo_blazor/PRJ_Delivery_Blazor/PRJ_Delivery_Blazor/Pages/Clientes/ClienteCrear.razor]
