@@ -17,7 +17,9 @@
                         <tr>
                             <th>Nit</th>
                             <th>Rol</th>
-                            <th>Acciones</th>
+                            <AuthorizeView Roles="ADM" >
+                                <th>Acciones</th>
+                            </AuthorizeView>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,12 +29,12 @@
                                 <td>@item.idCliente</td>
                                 <td>@item.Nit</td>
                                 <td>
-                                    @*<AuthorizeView Roles="CAJ, ADM" >*@
+                                    <AuthorizeView Roles="ADM" >
                                         <button class="btn btn-primary" @onclick="@(()=>Modificar(item.idCliente))">Modificar</button>
-                                    @*</AuthorizeView>*@
-                                    @*<AuthorizeView Roles="ADM" >*@
+                                    </AuthorizeView>
+                                    <AuthorizeView  Roles="ADM">
                                         <button class="btn btn-danger" @onclick="@(()=> Eliminar(item.idCliente))" >Eliminar</button>
-                                    @*</AuthorizeView>*@
+                                    </AuthorizeView>
                                 </td>
                             </tr>
                         }

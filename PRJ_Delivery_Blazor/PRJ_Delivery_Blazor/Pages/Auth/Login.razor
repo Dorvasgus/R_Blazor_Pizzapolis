@@ -1,5 +1,4 @@
-﻿@page "/Login"
-
+﻿@page "/"
 @inject IRepositorio repositorioHTTP
 @inject NavigationManager navigationManager
 @inject ILoginService loginService
@@ -57,7 +56,7 @@
 
     async Task login()
     {
-        var response = await repositorioHTTP.Post<UsuarioLoginDTO, UserToken>("usuarios/Login", usuarioLoginDTO);
+        var response = await repositorioHTTP.Post<UsuarioLoginDTO, UserToken>("Usuario/Login", usuarioLoginDTO);
         if (response.Error)
         {
             mensaje = "Error al iniciar";
