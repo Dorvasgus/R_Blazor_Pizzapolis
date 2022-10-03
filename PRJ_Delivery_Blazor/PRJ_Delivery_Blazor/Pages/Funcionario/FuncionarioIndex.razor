@@ -1,0 +1,138 @@
+﻿@page "/Funcionario"
+@using Microsoft.AspNetCore.Authorization
+@using PRJ_Delivery_Blazor.Helpers
+@using PRJ_Delivery_Blazor.Repositorio
+@using PRJ_Delivery_Blazor.DTOs
+@using PRJ_Delivery_Blazor.Shared
+@using PRJ_Delivery_Blazor
+@attribute [Authorize(Roles = "ADM, CAJ")]
+@inject IRepositorio repositorioHTTP
+@inject NavigationManager navigationManager
+@inject IMostrarMensajes mostrarMensaje
+
+
+
+<div class="container bg-white bg-opacity-75 p-5 rounded">
+    <h1>Listado Clientes</h1>
+    <button class="btn btn-primary" @onclick="Crear">Crear</button>
+    <ListadoGenerico Listado="funcionarios">
+        <HayRegistroCompleto>
+            <div class="mt-5">
+                <table class="table table-dark text-white table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>IdFuncionario</th>
+                            <th>Correo</th>
+                            <th>IdUsuario</th>
+                            <th>Vehiculo</th>
+                            <th>IdRol</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in funcionarios!)
+                        {
+                            <tr>
+                                <td>@item.IdFuncionario</td>
+                                <td>@item.Correo</td>
+                                <td>@item.IdUsuario</td>
+                                <td>@item.Vehiculo</td>
+                                <td>@item.IdRol</td>
+                                <td>
+                                    @*<AuthorizeView Roles="CAJ, ADM" >*@
+                                    <button class="btn btn-primary" @onclick="@(()=>Modificar(item.IdFuncionario))">Modificar</button>
+                                    @*</AuthorizeView>*@
+                                    @*<AuthorizeView Roles="ADM" >*@
+                                    <button class="btn btn-danger" @onclick="@(()=> Eliminar(item.IdFuncionario))">Eliminar</button>
+                                    @*</AuthorizeView>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <Paginacion PaginaActual="paginaActual" PaginaSeleccionada="paginaSeleccionada"
+                        PaginasTotales="paginasTotales"></Paginacion>
+
+        </HayRegistroCompleto>
+        <NoHayRegistro>
+            <h6>no hay registros desde TEST</h6>
+        </NoHayRegistro>
+        <Cargando>
+            <h1>Esperando informaciòn</h1>
+        </Cargando>
+    </ListadoGenerico>
+</div>
+
+
+@code {
+
+
+    private int paginaActual = 1;
+    private int paginasTotales;
+
+    List<FuncionarioDTO>? funcionarios;
+    ResponseListDTO<FuncionarioDTO>? responseListDTO;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await TraerDatos();
+    }
+    private async Task paginaSeleccionada(int pagina)
+    {
+        paginaActual = pagina;
+        await TraerDatos(pagina);
+    }
+
+
+
+    private async Task TraerDatos(int pagina = 1)
+    {
+        try
+        {
+            //https://localhost:7024/api/Funcionario/paginacion?Pagina=1&CantidadRegistroPorPagina=4
+            //cliente-usuario-persona(localidad)-funcionario-pedido
+            var responseWrapper = await repositorioHTTP.Get<ResponseListDTO<FuncionarioDTO>>($"Funcionario/paginacion?Pagina={pagina}&CantidadRegistroPorPagina=2");
+            if (!responseWrapper.Error)
+            {
+                responseListDTO = responseWrapper.Response;
+
+                funcionarios = responseListDTO.valores;
+                paginasTotales = responseListDTO.cantidad;
+            }
+        }
+        catch (Exception ex)
+        {
+            var mess = ex.Message;
+        }
+    }
+
+    private void Crear()
+    {
+        navigationManager.NavigateTo("/Cliente/Crear");
+    }
+    private void Modificar(int id)
+    {
+        navigationManager.NavigateTo($"/Cliente/Editar/{id}");
+    }
+    private async Task Eliminar(int id)
+    {
+        var pregunta = await mostrarMensaje.Confirmacion("Eliminar", "Esta seguro de eliminar el registro","question");
+        if (pregunta)
+        {
+            var response = await repositorioHTTP.Delete<object>($"Funcionario/{id}");
+             if (!response.Error)
+             {
+                 await mostrarMensaje.MostrarMensajeExitoso("Registro eliminado");
+                 await TraerDatos();
+             }
+             else
+             {
+                 await mostrarMensaje.MostrarMensajeError("Error al eliminar el registro");
+             }
+        }
+    }
+}
