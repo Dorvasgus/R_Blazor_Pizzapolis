@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using PRJ_Delivery_Blazor;
 using PRJ_Delivery_Blazor.Auth;
 using PRJ_Delivery_Blazor.Configuration;
+using PRJ_Delivery_Blazor.Helpers;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 var configuration = builder.Configuration;
@@ -18,7 +19,7 @@ builder.Services.AddAuthorizationCore();
 
 builder.Services.AddScoped<ProveedorAutenticacionJWT>();
 
-//builder.Services.AddScoped<IMostrarMensajes, MostrarMensajes>();
+builder.Services.AddScoped<IMostrarMensajes, MostrarMensajes>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, ProveedorAutenticacionJWT>(
               provider => provider.GetRequiredService<ProveedorAutenticacionJWT>());

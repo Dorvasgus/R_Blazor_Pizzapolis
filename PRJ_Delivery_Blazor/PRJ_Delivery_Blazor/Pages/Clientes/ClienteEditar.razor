@@ -46,7 +46,7 @@
         
         if (pregunta)
         {
-            var response = await repositorioHTTP.Put<ClienteInsertarDTO>($"autores/{id}", model);
+            var response = await repositorioHTTP.Put<ClienteInsertarDTO>($"Cliente/{id}", model);
             if (response.Error)
             {
                 await mostrarMensaje.MostrarMensajeError("Error al guardar el autor");
@@ -54,7 +54,7 @@
             else
             {
                 await mostrarMensaje.MostrarMensajeExitoso("Autor actualizado con éxito");
-                navigationManager.NavigateTo("/Autores");
+                navigationManager.NavigateTo("/Cliente");
             }
         }
           

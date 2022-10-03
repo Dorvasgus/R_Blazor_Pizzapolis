@@ -1,12 +1,14 @@
 ﻿@page "/Cliente"
-@using PRJ_Delivery_Blazor.Repositorio
+@attribute [Authorize(Roles = "ADM, CAJ")]
 @inject IRepositorio repositorioHTTP
 @inject NavigationManager navigationManager
 @inject IMostrarMensajes mostrarMensaje
 
-@*<button class="btn btn-primary" @onclick="Crear" >Crear</button>*@
+
 
 <div class="container bg-white bg-opacity-75 p-5 rounded">
+    <h1>Listado Clientes</h1>
+    <button class="btn btn-primary" @onclick="Crear" >Crear</button>
     <ListadoGenerico Listado="clientes">
         <HayRegistroCompleto>
             <div class="mt-5">
@@ -15,6 +17,7 @@
                         <tr>
                             <th>Nit</th>
                             <th>Rol</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,10 +29,10 @@
                                 <td>
                                     @*<AuthorizeView Roles="CAJ, ADM" >*@
                                         <button class="btn btn-primary" @onclick="@(()=>Modificar(item.idCliente))">Modificar</button>
-                                   @* </AuthorizeView>*@
-                                   @* <AuthorizeView Roles="ADM" >*@
+                                    @*</AuthorizeView>*@
+                                    @*<AuthorizeView Roles="ADM" >*@
                                         <button class="btn btn-danger" @onclick="@(()=> Eliminar(item.idCliente))" >Eliminar</button>
-                                   @* </AuthorizeView>*@
+                                    @*</AuthorizeView>*@
                                 </td>
                             </tr>
                         }
