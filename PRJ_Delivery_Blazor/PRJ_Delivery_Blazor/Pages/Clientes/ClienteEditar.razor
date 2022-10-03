@@ -1,0 +1,64 @@
+﻿@page "/Cliente/Editar/{id:int}"
+@attribute [Authorize(Roles = "ADM")]
+@inject IRepositorio repositorioHTTP
+@inject NavigationManager navigationManager
+@inject IMostrarMensajes mostrarMensaje
+
+
+<h1>Crear Autor</h1>
+
+<FormularioCliente OnValidSubmit="@Guardar" model="@model">
+    
+</FormularioCliente>
+
+
+@code     
+ {
+    [Parameter] public int id { get; set; }
+
+     ClienteInsertarDTO model = new ClienteInsertarDTO();
+     
+    protected override async Task OnInitializedAsync()
+    {
+        await ObtenerAutor();
+        
+    }
+
+    //obtener el autor por id
+    private async Task ObtenerAutor()
+    {
+        var response = await repositorioHTTP.Get<ClienteInsertarDTO>($"Cliente/{id}");
+        if (response.Error)
+        {
+            Console.WriteLine("Error");
+        }
+        else
+        {
+            model = response.Response;
+        }
+    }
+    
+
+    private async Task Guardar()
+    {
+
+        var pregunta = await mostrarMensaje.Confirmacion("Actualizar", "¿Está seguro de guardar el autor?", "question");
+        
+        if (pregunta)
+        {
+            var response = await repositorioHTTP.Put<ClienteInsertarDTO>($"autores/{id}", model);
+            if (response.Error)
+            {
+                await mostrarMensaje.MostrarMensajeError("Error al guardar el autor");
+            }
+            else
+            {
+                await mostrarMensaje.MostrarMensajeExitoso("Autor actualizado con éxito");
+                navigationManager.NavigateTo("/Autores");
+            }
+        }
+          
+      
+
+    }
+}

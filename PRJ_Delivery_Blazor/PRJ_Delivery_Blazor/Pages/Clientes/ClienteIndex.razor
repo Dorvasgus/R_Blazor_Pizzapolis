@@ -1,64 +1,108 @@
-﻿@page "/Clientes"
+﻿@page "/Cliente"
 @using PRJ_Delivery_Blazor.Repositorio
 @inject IRepositorio repositorioHTTP
+@inject NavigationManager navigationManager
+@inject IMostrarMensajes mostrarMensaje
 
-<ListadoGenerico Listado="clientes">
-    <HayRegistroCompleto>
-        <div class="mt-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nit</th>
-                        <th>Rol</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in clientes!)
-                    {
+@*<button class="btn btn-primary" @onclick="Crear" >Crear</button>*@
+
+<div class="container bg-white bg-opacity-75 p-5 rounded">
+    <ListadoGenerico Listado="clientes">
+        <HayRegistroCompleto>
+            <div class="mt-5">
+                <table class="table table-dark text-white">
+                    <thead>
                         <tr>
-                            <td>@item.Nit</td>
-                            <td>@item.Rol</td>
+                            <th>Nit</th>
+                            <th>Rol</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </HayRegistroCompleto>
-    <NoHayRegistro>
-        <h6>no hay registros desde TEST</h6>
-    </NoHayRegistro>
-    <Cargando>
-        <h1>Esperando informaciòn</h1>
-    </Cargando>
-
-
-</ListadoGenerico>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in clientes!)
+                        {
+                            <tr>
+                                <td>@item.idCliente</td>
+                                <td>@item.Nit</td>
+                                <td>
+                                    @*<AuthorizeView Roles="CAJ, ADM" >*@
+                                        <button class="btn btn-primary" @onclick="@(()=>Modificar(item.idCliente))">Modificar</button>
+                                   @* </AuthorizeView>*@
+                                   @* <AuthorizeView Roles="ADM" >*@
+                                        <button class="btn btn-danger" @onclick="@(()=> Eliminar(item.idCliente))" >Eliminar</button>
+                                   @* </AuthorizeView>*@
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </HayRegistroCompleto>
+        <NoHayRegistro>
+            <h6>no hay registros desde TEST</h6>
+        </NoHayRegistro>
+        <Cargando>
+            <h1>Esperando informaciòn</h1>
+        </Cargando>
+    </ListadoGenerico>
+ </div>
 
 
 @code {
 
+
+    private int paginaActual = 1;
+    private int paginasTotales;
 
     List<ClienteDTO>? clientes;
     ResponseListDTO<ClienteDTO>? responseListDTO;
 
     protected override async Task OnInitializedAsync()
     {
-        try
+        await TraerDatos();
+    }
+
+    private async Task TraerDatos(int pagina =  1)
+    {
+         try
         {
-            var responseWrapper = await repositorioHTTP.Get<ResponseListDTO<ClienteDTO>>("Cliente?Pagina=1&CantidadRegistrosPorPagina=20");
+            var responseWrapper = await repositorioHTTP.Get<ResponseListDTO<ClienteDTO>>($"Cliente/paginacion?Pagina={pagina}&CantidadRegistrosPorPagina=3");
             if (!responseWrapper.Error)
             {
-                responseListDTO = responseWrapper.Response;
+                responseListDTO  = responseWrapper.Response;
 
-                clientes = responseListDTO.valores;
-
+               clientes = responseListDTO.valores;
+               paginasTotales = responseListDTO.cantidadPaginas;
             }
         }
-        catch (Exception ex)
+        catch(Exception ex)
         {
             var mess = ex.Message;
         }
-
     }
 
+    private void Crear()
+    {
+        navigationManager.NavigateTo("/Cliente/Crear");
+    }
+    private void Modificar(int id)
+    {
+        navigationManager.NavigateTo($"/Cliente/Editar/{id}");
+    }
+    private async Task Eliminar(int id)
+    {
+        var pregunta = await mostrarMensaje.Confirmacion("Eliminar", "Esta seguro de eliminar el registro","question");
+        if (pregunta)
+        {
+             var response = await repositorioHTTP.Delete<object>($"Cliente/{id}");
+             if (!response.Error)
+             {
+                 await mostrarMensaje.MostrarMensajeExitoso("Registro eliminado");
+                 await TraerDatos();
+             }
+             else
+             {
+                 await mostrarMensaje.MostrarMensajeError("Error al eliminar el registro");
+             }  
+        }
+    }
 }

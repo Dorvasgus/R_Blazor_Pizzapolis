@@ -5,16 +5,15 @@
     <DataAnnotationsValidator />
     <div class="container bg-white bg-opacity-75 p-5 rounded">
         <div class="form-group">
+            <label for="idc">IdCliente</label>
+            <InputNumber class="form-control" id="idc" @bind-Value="model.idCliente"> </InputNumber>
+            <ValidationMessage For="@(() => model.idCliente)"/>
+        </div>
+        <div class="form-group">
             <label for="nit">Nit</label>
             <InputText class="form-control" id="Nit" @bind-Value="model.Nit" />
             <ValidationMessage For="@(() => model.Nit)" />
         </div>
-        <div class="form-group">
-            <label for="Rol">Rol</label>
-            <InputNumber class="form-control" id="rol" @bind-Value="model.Rol"> </InputNumber>
-            <ValidationMessage For="@(() => model.Rol)"/>
-        </div>
-    
         <br />
         <div class="row" >
             <div class="col-10" >
@@ -30,7 +29,4 @@
     [Parameter] public EventCallback OnValidSubmit { get; set; }
     [Parameter] public EventCallback onCancel { get; set; }
     [Parameter] public ClienteInsertarDTO model { get; set; }
-    //ClienteInsertarDTO model = new ClienteInsertarDTO();
-
-
 }

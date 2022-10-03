@@ -6,17 +6,10 @@ namespace PRJ_Delivery_Blazor.DTOs
     {
 
         [Required(ErrorMessage = "El campo nombre es obligatorio.")]
-        [StringLength(50)]
-        public string Nit { get; set; } = null!;
+        public int idCliente { get; set; }
 
         [Required(ErrorMessage = "El campo nombre es obligatorio.")]
-        public int Rol { get; set; }
+        [StringLength(50)]
+        public string Nit { get; set; } = null!;
     }
-    //public class ClienteActualizarDTO : ClienteInsertarDTO
-    //{
-    //    [Required]
-    //    public bool Estado { get; set; }
-
-
-    //}
 }

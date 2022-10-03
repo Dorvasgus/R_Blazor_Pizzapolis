@@ -2,7 +2,7 @@
 {
     public class ClienteDTO
     {
+        public int idCliente { get; set; }
         public string Nit { get; set; } = null!;
-        public int Rol { get; set; }
     }
 }
