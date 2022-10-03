@@ -39,6 +39,10 @@
                     </tbody>
                 </table>
             </div>
+
+            <Paginacion PaginaActual="paginaActual" PaginaSeleccionada="paginaSeleccionada"
+            PaginasTotales="paginasTotales"></Paginacion>
+
         </HayRegistroCompleto>
         <NoHayRegistro>
             <h6>no hay registros desde TEST</h6>
@@ -63,18 +67,27 @@
     {
         await TraerDatos();
     }
+    private async Task paginaSeleccionada(int pagina)
+    {
+        paginaActual = pagina;
+        await TraerDatos(pagina);
+    }
+
+
 
     private async Task TraerDatos(int pagina =  1)
     {
          try
         {
-            var responseWrapper = await repositorioHTTP.Get<ResponseListDTO<ClienteDTO>>($"Cliente/paginacion?Pagina={pagina}&CantidadRegistrosPorPagina=3");
+       //https://localhost:7024/api/Cliente/paginacion?Pagina=1&CantidadRegistroPorPagina=2
+       //cliente-usuario-persona(localidad)-funcionario-pedido
+            var responseWrapper = await repositorioHTTP.Get<ResponseListDTO<ClienteDTO>>($"Cliente/paginacion?Pagina={pagina}&CantidadRegistroPorPagina=2");
             if (!responseWrapper.Error)
             {
                 responseListDTO  = responseWrapper.Response;
 
                clientes = responseListDTO.valores;
-               paginasTotales = responseListDTO.cantidadPaginas;
+               paginasTotales = responseListDTO.cantidad;
             }
         }
         catch(Exception ex)

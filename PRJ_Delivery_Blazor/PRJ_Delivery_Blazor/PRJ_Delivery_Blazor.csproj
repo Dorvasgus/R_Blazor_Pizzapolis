@@ -8,8 +8,7 @@
 
   <ItemGroup>
     <Content Remove="Pages\Clientes\Clientes.razor" />
-    <Content Remove="Pages\Funcionario\Funcionarios.razor" />
-    <Content Remove="Pages\Producto\Clientes.razor" />
+    <Content Remove="Pages\Producto\ProductoIndex.razor" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,8 +29,7 @@
 
   <ItemGroup>
     <None Include="Pages\Clientes\Clientes.razor" />
-    <None Include="Pages\Funcionario\Funcionarios.razor" />
-    <None Include="Pages\Producto\Clientes.razor" />
+    <None Include="Pages\Producto\ProductoIndex.razor" />
     <None Include="wwwroot\js\Utilidades.js" />
   </ItemGroup>
 
