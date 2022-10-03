@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0SuHAk9T4h8Bn6lLteI1ycaW7uzBTjc14j719gjhPlc=",
+  "Hash": "OiUJMtZlPd0uy5DoJP92gsnK5T89x6dLjzVtsIvlVic=",
   "Source": "PRJ_Delivery_Blazor",
   "BasePath": "/",
   "Mode": "Root",
@@ -7631,6 +7631,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "D:\\Universidad\\Sexto Semestre\\Programacion Web II\\respaldo_blazor\\PRJ_Delivery_Blazor\\PRJ_Delivery_Blazor\\wwwroot\\js\\Utilidades.js",
+      "SourceId": "PRJ_Delivery_Blazor",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Universidad\\Sexto Semestre\\Programacion Web II\\respaldo_blazor\\PRJ_Delivery_Blazor\\PRJ_Delivery_Blazor\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "js/Utilidades.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Utilidades.js"
     },
     {
       "Identity": "D:\\Universidad\\Sexto Semestre\\Programacion Web II\\respaldo_blazor\\PRJ_Delivery_Blazor\\PRJ_Delivery_Blazor\\wwwroot\\pizza_bg.jpg",
